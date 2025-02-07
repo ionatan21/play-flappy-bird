@@ -9,7 +9,7 @@ function setup() {
   if (highScore > 0) {
     document.getElementById("highScore").textContent = highScore;
   }
-  createCanvas(floor(windowWidth / 100) * 90, floor(windowHeight / 100) * 100);
+  createCanvas(floor(windowWidth / 100) * 100, floor(windowHeight / 100) * 100);
   bird = new Bird();
   pipes.push(new Pipe());
 
