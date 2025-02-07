@@ -3,6 +3,7 @@ let gameOver = false;
 let gameStarted = false;
 let score = 0;
 let highScore = 0;
+let gap = 140;
 
 function setup() {
   highScore = localStorage.getItem("highScore");
@@ -67,8 +68,11 @@ function draw() {
       score++;
       if (score > highScore) highScore = score;
       updateScore();
+      if (score % 10 == 0) {
+        gap -= 3;
+      }
 
-      console.log("Score: " + score + " High Score: " + highScore);
+     
     }
 
     if (pipes[i].offscreen()) {
