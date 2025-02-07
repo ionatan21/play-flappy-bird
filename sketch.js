@@ -101,6 +101,6 @@ function handleInput() {
 
 function updateScore() {
   document.getElementById("score").textContent = score;
-  document.getElementById("highScore").textContent = 55;
+  document.getElementById("highScore").textContent = highScore;
   localStorage.setItem("highScore", highScore);
 }
