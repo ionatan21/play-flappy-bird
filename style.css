@@ -16,12 +16,16 @@ canvas {
 
 #scoreBoard {
   display: flex;
-  margin: 20px;
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-top: 20px;
   justify-content: space-between;
   width: 75%;
   padding: 10px;
   font-size: 20px;
-  background-color: #333;
+
   border-radius: 5px;
   color: white;
   font-family: sans-serif;
