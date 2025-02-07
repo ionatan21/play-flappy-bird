@@ -14,7 +14,7 @@ function setup() {
   bird = new Bird();
   pipes.push(new Pipe());
 
-  for (let i = 0; i < 25; i++) {
+  for (let i = 0; i < 15; i++) {
     clouds.push(new Cloud());
   }
 }

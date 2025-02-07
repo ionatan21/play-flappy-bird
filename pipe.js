@@ -1,6 +1,6 @@
 class Pipe {
   constructor() {
-    this.gap = 140; // Espacio fijo entre las barras
+    this.gap = gap; // Espacio fijo entre las barras
     this.top = random(height - this.gap); // Altura aleatoria de la barra superior
     this.bottom = height - (this.top + this.gap); // Se asegura de que la separación sea constante
     this.x = width;

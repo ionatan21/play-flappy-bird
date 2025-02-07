@@ -2,7 +2,7 @@ class Bird {
   constructor() {
     this.x = width / 3;
     this.y = height / 2;
-    this.img = loadImage("birdimg.png");
+    this.img = loadImage("birdimg.webp");
     this.gravity = 0.6;
     this.velocity = 0;
   }

@@ -5,7 +5,7 @@ class Cloud {
     this.x = random(0, width + 100);
     this.y = random(50, 300);
     this.speed = random(1, 2);
-    this.image = loadImage("cloudimg.png");
+    this.image = loadImage("cloudimg.webp");
   }
 
   show() {
