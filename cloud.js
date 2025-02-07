@@ -9,7 +9,7 @@ class Cloud {
   }
 
   show() {
-    image(this.image, this.x, this.y, 50, 50);
+    image(this.image, this.x, this.y, 70, 70);
   }
 
   update() {

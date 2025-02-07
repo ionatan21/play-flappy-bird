@@ -12,11 +12,13 @@ function setup() {
   createCanvas(floor(windowWidth / 100) * 90, floor(windowHeight / 100) * 80);
   bird = new Bird();
   pipes.push(new Pipe());
+
+  for (let i = 0; i < 25; i++) {
+    clouds.push(new Cloud());
+  }
 }
 
-for (let i = 0; i < 5; i++) {
-  clouds.push(new Cloud());
-}
+
 
 function draw() {
   background(135, 206, 235);
@@ -91,6 +93,6 @@ function mousePressed() {
 
 function updateScore() {
   document.getElementById("score").textContent = score;
-  document.getElementById("highScore").textContent = highScore;
+  document.getElementById("highScore").textContent = 55;
   localStorage.setItem("highScore", highScore);
 }
