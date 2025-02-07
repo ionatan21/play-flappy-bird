@@ -12,6 +12,7 @@ body {
 
 canvas {
   display: block;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 #scoreBoard {
@@ -30,6 +31,8 @@ canvas {
   color: white;
   font-family: sans-serif;
   user-select: none;
+  font-family: 'Courier New', Courier, monospace;
+
 }
 
 @media screen and (max-width: 600px) {

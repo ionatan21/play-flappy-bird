@@ -34,11 +34,20 @@ class Pipe {
   }
 
   hits(bird) {
-    if (bird.y < this.top || bird.y > height - this.bottom) {
-      if (bird.x > this.x && bird.x < this.x + this.w) {
-        return true;
-      }
-    }
-    return false;
+    let birdLeft = bird.x - bird.radius;
+    let birdRight = bird.x + bird.radius;
+    let birdTop = bird.y - bird.radius;
+    let birdBottom = bird.y + bird.radius;
+  
+    let pipeLeft = this.x;
+    let pipeRight = this.x + this.w;
+  
+    let xOverlap = birdRight > pipeLeft && birdLeft < pipeRight;
+  
+    let yOverlapTop = birdTop < this.top;
+    let yOverlapBottom = birdBottom > height - this.bottom;
+  
+    return xOverlap && (yOverlapTop || yOverlapBottom);
   }
+  
 }

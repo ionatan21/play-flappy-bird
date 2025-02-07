@@ -4,9 +4,11 @@ let gameStarted = false;
 let score = 0;
 let highScore = 0;
 let gap = 140;
+let Canvasbackground = { 1: 135, 2: 206, 3: 235 };
 
 function setup() {
   highScore = localStorage.getItem("highScore");
+  frameRate(60);
   if (highScore > 0) {
     document.getElementById("highScore").textContent = highScore;
   }
@@ -19,10 +21,8 @@ function setup() {
   }
 }
 
-
-
 function draw() {
-  background(135, 206, 235);
+  background(Canvasbackground[1], Canvasbackground[2], Canvasbackground[3]);
 
   for (let cloud of clouds) {
     cloud.update();
@@ -33,6 +33,7 @@ function draw() {
     textAlign(CENTER);
     fill(255);
     textSize(25);
+    textFont("Courier New");
     text("Presiona para comenzar", width / 2, height / 2);
 
     return;
@@ -43,6 +44,8 @@ function draw() {
     textAlign(CENTER);
     fill(255);
     textSize(25);
+    textFont("Courier New");
+    stroke(0);
     text("GAME OVER\nPresiona para reiniciar", width / 2, height / 2);
     noLoop();
     score = 0;
@@ -52,7 +55,7 @@ function draw() {
   bird.update();
   bird.show();
 
-  if (frameCount % 80 == 0) {
+  if (frameCount % 100 == 0 && !gameOver && gameStarted) {
     pipes.push(new Pipe());
   }
 
@@ -68,11 +71,15 @@ function draw() {
       score++;
       if (score > highScore) highScore = score;
       updateScore();
-      if (score % 10 == 0) {
-        gap -= 3;
+      if (score % 10 == 0 && gap > 70) {
+        gap -= 5;
       }
 
-     
+      if (score % 2 == 0) {
+        Canvasbackground[1] -= 3;
+        Canvasbackground[2] -= 3;
+        Canvasbackground[3] -= 3;
+      }
     }
 
     if (pipes[i].offscreen()) {
@@ -92,11 +99,17 @@ function touchStarted() {
 function handleInput() {
   if (!gameStarted) {
     gameStarted = true;
+    Canvasbackground[1] = 135;
+    Canvasbackground[2] = 206;
+    Canvasbackground[3] = 235;
   } else if (!isLooping()) {
     gameStarted = true;
     gameOver = false;
     pipes = [];
     bird = new Bird();
+    Canvasbackground[1] = 135;
+    Canvasbackground[2] = 206;
+    Canvasbackground[3] = 235;
     loop();
   } else {
     bird.jump();
