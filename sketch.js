@@ -16,7 +16,7 @@ function setup() {
   bird = new Bird();
   pipes.push(new Pipe());
 
-  for (let i = 0; i < 15; i++) {
+  for (let i = 0; i < 20; i++) {
     clouds.push(new Cloud());
   }
 }
@@ -120,4 +120,17 @@ function updateScore() {
   document.getElementById("score").textContent = score;
   document.getElementById("highScore").textContent = highScore;
   localStorage.setItem("highScore", highScore);
+}
+
+
+function windowResized() {
+  resizeCanvas(innerWidth, innerHeight);
+  resetGame(); // Llama una función para restablecer el juego si es necesario
+}
+
+function resetGame() {
+  pipes = [];
+  bird = new Bird();
+  gameStarted = false;
+  gameOver = false;
 }
