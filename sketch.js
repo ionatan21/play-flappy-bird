@@ -133,4 +133,6 @@ function resetGame() {
   bird = new Bird();
   gameStarted = false;
   gameOver = false;
+  score = 0;
+  updateScore();
 }
