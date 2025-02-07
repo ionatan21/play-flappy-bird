@@ -78,6 +78,14 @@ function draw() {
 }
 
 function mousePressed() {
+  handleInput();
+}
+
+function touchStarted() {
+  handleInput();
+}
+
+function handleInput() {
   if (!gameStarted) {
     gameStarted = true;
   } else if (!isLooping()) {
