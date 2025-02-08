@@ -72,7 +72,7 @@ function draw() {
       if (score > highScore) highScore = score;
       updateScore();
       if (score % 10 == 0 && gap > 70) {
-        gap -= 5;
+        gap -= 10;
       }
 
       if (score % 2 == 0) {
