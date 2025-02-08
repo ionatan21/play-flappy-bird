@@ -3,7 +3,7 @@ let gameOver = false;
 let gameStarted = false;
 let score = 0;
 let highScore = 0;
-let gap = 140;
+let gap = 200;
 let Canvasbackground = { 1: 135, 2: 206, 3: 235 };
 
 function setup() {
