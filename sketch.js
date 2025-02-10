@@ -5,6 +5,9 @@ let score = 0;
 let highScore = 0;
 let gap = 200;
 let Canvasbackground = { 1: 135, 2: 206, 3: 235 };
+let pipforce = 4;
+let pipeW = 40;
+let jumpforce = -10;
 
 function setup() {
   highScore = localStorage.getItem("highScore");
@@ -47,7 +50,7 @@ function draw() {
     textFont("Courier New");
     stroke(0);
     text("GAME OVER\nPresiona para reiniciar", width / 2, height / 2);
-    noLoop();
+
     score = 0;
     return;
   }
@@ -71,7 +74,7 @@ function draw() {
       score++;
       if (score > highScore) highScore = score;
       updateScore();
-      if (score % 10 == 0 && gap > 70) {
+      if (score % 10 == 0 && gap > 80) {
         gap -= 10;
       }
 
@@ -79,6 +82,15 @@ function draw() {
         Canvasbackground[1] -= 3;
         Canvasbackground[2] -= 3;
         Canvasbackground[3] -= 3;
+      }
+
+      if (score === 75) {
+        pipeW = 25;
+      }
+
+      if (score === 100) {
+        pipforce = 5;
+        jumpforce = -9;
       }
     }
 
@@ -99,17 +111,13 @@ function touchStarted() {
 function handleInput() {
   if (!gameStarted) {
     gameStarted = true;
-    Canvasbackground[1] = 135;
-    Canvasbackground[2] = 206;
-    Canvasbackground[3] = 235;
-  } else if (!isLooping()) {
+    resetStats();
+  } else if (gameOver) {
     gameStarted = true;
     gameOver = false;
     pipes = [];
     bird = new Bird();
-    Canvasbackground[1] = 135;
-    Canvasbackground[2] = 206;
-    Canvasbackground[3] = 235;
+    resetStats();
     loop();
   } else {
     bird.jump();
@@ -122,10 +130,9 @@ function updateScore() {
   localStorage.setItem("highScore", highScore);
 }
 
-
 function windowResized() {
   resizeCanvas(innerWidth, innerHeight);
-  resetGame(); // Llama una función para restablecer el juego si es necesario
+  resetGame();
 }
 
 function resetGame() {
@@ -135,4 +142,22 @@ function resetGame() {
   gameOver = false;
   score = 0;
   updateScore();
+}
+
+function resetStats() {
+  score = 0;
+  pipforce = 4;
+  jumpforce = -10;
+  gap = 200;
+  Canvasbackground[1] = 135;
+  Canvasbackground[2] = 206;
+  Canvasbackground[3] = 235;
+}
+
+function showStats() {
+  console.log("Score: ", score);
+  console.log("High Score: ", highScore);
+  console.log("Pipforce: ", pipforce);
+  console.log("Jumpforce: ", jumpforce);
+  console.log("Gap: ", gap);
 }

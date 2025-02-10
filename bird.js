@@ -9,23 +9,23 @@ class Bird {
   }
 
   show() {
-    push(); // Guarda la configuración actual del lienzo
-    translate(this.x, this.y); // Mueve el punto de origen a la posición del pájaro
+    push(); 
+    translate(this.x, this.y); 
   
-    // Calcula el ángulo de inclinación basado en la velocidad
-    let angle = constrain(this.velocity * 0.05, -PI / 6, PI / 4); // Limitamos la rotación
+    
+    let angle = constrain(this.velocity * 0.05, -PI / 6, PI / 4); 
   
-    rotate(angle); // Aplica la rotación
+    rotate(angle);
   
-    // Dibujar la imagen centrada en (0, 0) en lugar de (this.x, this.y)
+
     image(this.img, -25, -25, 50, 50);
   
-    pop(); // Restaura la configuración del lienzo
+    pop();
   }
   
 
   jump() {
-    this.velocity = -10;
+    this.velocity = jumpforce;
   }
 
   update() {
