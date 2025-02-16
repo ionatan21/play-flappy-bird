@@ -84,8 +84,8 @@ function draw() {
         Canvasbackground[3] -= 3;
       }
 
-      if (score === 75) {
-        pipeW = 25;
+      if (score === 50) {
+        pipeW = 30;
       }
 
       if (score === 100) {
@@ -102,6 +102,15 @@ function draw() {
 
 function mousePressed() {
   handleInput();
+}
+
+function keyPressed() {
+  if (keyCode === 32) {
+    handleInput();
+  }
+  if (keyCode === 38) {
+    handleInput();
+  }
 }
 
 function touchStarted() {
