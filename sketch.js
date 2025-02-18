@@ -23,6 +23,12 @@ function preload() {
   jumpSound = loadSound("sfx_wing.wav");  
   hitSound = loadSound("sfx_hit.wav");    
   point = loadSound("sfx_point.wav");
+  jumpSound.playMode('restart');
+  jumpSound.rate(1.2);  
+  hitSound.playMode('restart');
+  hitSound.rate(1.2);  
+  point.playMode('restart');
+  point.rate(1.2);
 
 
   birdicon1 = loadImage("flappy-bird-blue.svg"); 
@@ -40,9 +46,8 @@ function setup() {
   if (highScore > 0) {
     document.getElementById("highScore").textContent = highScore;
   }
-  jumpSound.playMode('restart');
-  hitSound.playMode('restart');
-  point.playMode('restart');
+
+
   createCanvas(innerWidth, innerHeight);
   bird = new Bird();
   pipes.push(new Pipe());
