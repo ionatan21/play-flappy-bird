@@ -20,13 +20,16 @@ let birdicon2;
 let cloudicon;
 
 function preload() {
-  jumpSound = loadSound("sfx_wing.wav");  
-  hitSound = loadSound("sfx_hit.wav");    
-  point = loadSound("sfx_point.wav");
+  jumpSound = loadSound("sfx_wing.mp3");  
+  hitSound = loadSound("sfx_hit.mp3");    
+  point = loadSound("sfx_point.mp3");
+
   jumpSound.playMode('restart');
   jumpSound.rate(1.2);  
+
   hitSound.playMode('restart');
   hitSound.rate(1.2);  
+  
   point.playMode('restart');
   point.rate(1.2);
 
@@ -102,12 +105,16 @@ function draw() {
     if (pipes[i].hits(bird)) {
       hitSound.play();
       bird.death();
-
+      if (!hitSound.isPlaying()) {
+        cleanupSound();
+      }
     }
 
     if (pipes[i].passed(bird)) {
       score++;
-      point.play();
+      if (!point.isPlaying()) {
+        point.play();
+      }
       if (score > highScore) highScore = score;
       updateScore();
       if (score % 10 == 0 && gap > 80) {
@@ -188,6 +195,7 @@ function resetGame() {
   gameOver = false;
   score = 0;
   updateScore();
+  cleanupSound();
 }
 
 function resetStats() {
@@ -206,4 +214,18 @@ function showStats() {
   console.log("Pipforce: ", pipforce);
   console.log("Jumpforce: ", jumpforce);
   console.log("Gap: ", gap);
+}
+
+function cleanupSound() {
+  point.stop();
+  point.dispose(); 
+  point = loadSound("sfx_point.mp3"); 
+
+  jumpSound.stop();
+  jumpSound.dispose();
+  jumpSound = loadSound("sfx_wing.mp3");
+
+  hitSound.stop();
+  hitSound.dispose();
+  hitSound = loadSound("sfx_hit.mp3");
 }
