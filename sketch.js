@@ -8,6 +8,15 @@ let Canvasbackground = { 1: 135, 2: 206, 3: 235 };
 let pipforce = 4;
 let pipeW = 40;
 let jumpforce = -10;
+let jumpSound;
+let hitSound;
+let point
+
+function preload() {
+  jumpSound = loadSound("sfx_wing.wav");  
+  hitSound = loadSound("sfx_hit.wav");    
+  point = loadSound("sfx_point.wav");
+}
 
 function setup() {
   highScore = localStorage.getItem("highScore");
@@ -67,11 +76,13 @@ function draw() {
     pipes[i].update();
 
     if (pipes[i].hits(bird)) {
+      hitSound.play();
       bird.death();
     }
 
     if (pipes[i].passed(bird)) {
       score++;
+      point.play();
       if (score > highScore) highScore = score;
       updateScore();
       if (score % 10 == 0 && gap > 80) {
@@ -130,6 +141,7 @@ function handleInput() {
     loop();
   } else {
     bird.jump();
+    jumpSound.play();
   }
 }
 
