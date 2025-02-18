@@ -2,32 +2,26 @@ class Bird {
   constructor() {
     this.x = width / 3;
     this.y = height / 2;
-    this.images = [
-      loadImage("flappy-bird-blue.svg"),
-      loadImage("flappy-bird-blue-2.svg"),
-    ];
+    this.images = [birdicon1, birdicon2];
     this.imgIndex = 0;
-    this.frameCount = 0; 
+    this.frameCount = 0;
     this.gravity = 0.6;
     this.velocity = 0;
     this.radius = 10;
   }
 
   show() {
-    push(); 
-    translate(this.x, this.y); 
-  
-    
-    let angle = constrain(this.velocity * 0.05, -PI / 6, PI / 4); 
-  
+    push();
+    translate(this.x, this.y);
+
+    let angle = constrain(this.velocity * 0.05, -PI / 6, PI / 4);
+
     rotate(angle);
-  
 
     image(this.images[this.imgIndex], -25, -25, 50, 50);
-  
+
     pop();
   }
-  
 
   jump() {
     this.velocity = jumpforce;

@@ -8,15 +8,31 @@ let Canvasbackground = { 1: 135, 2: 206, 3: 235 };
 let pipforce = 4;
 let pipeW = 40;
 let jumpforce = -10;
+
+
 let jumpSound;
 let hitSound;
 let point
+
+let birdicon1;
+let birdicon2;
+
+let cloudicon;
 
 function preload() {
   jumpSound = loadSound("sfx_wing.wav");  
   hitSound = loadSound("sfx_hit.wav");    
   point = loadSound("sfx_point.wav");
+
+
+  birdicon1 = loadImage("flappy-bird-blue.svg"); 
+  birdicon2 = loadImage("flappy-bird-blue-2.svg"); 
+
+  cloudicon = loadImage("cloudwebp.webp");
 }
+
+
+
 
 function setup() {
   highScore = localStorage.getItem("highScore");
@@ -24,6 +40,9 @@ function setup() {
   if (highScore > 0) {
     document.getElementById("highScore").textContent = highScore;
   }
+  jumpSound.playMode('restart');
+  hitSound.playMode('restart');
+  point.playMode('restart');
   createCanvas(innerWidth, innerHeight);
   bird = new Bird();
   pipes.push(new Pipe());
@@ -78,6 +97,7 @@ function draw() {
     if (pipes[i].hits(bird)) {
       hitSound.play();
       bird.death();
+
     }
 
     if (pipes[i].passed(bird)) {
