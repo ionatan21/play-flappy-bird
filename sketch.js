@@ -5,37 +5,55 @@ let score = 0;
 let highScore = 0;
 let gap = 200;
 let Canvasbackground = { 1: 135, 2: 206, 3: 235 };
+
 let pipforce = 4;
 let pipeW = 40;
+let pipecolor = { r: 0, g: 200, b: 0 };
+
 let jumpforce = -10;
+
+let bgspeed = 1;
+let volume = 0.5;
 
 
 let jumpSound;
+let jumpSoundAux;
 let hitSound;
-let point
+let point;
 
 let birdicon1;
 let birdicon2;
 
 let cloudicon;
 
+let bgmusic;
+
 function preload() {
-  jumpSound = loadSound("sfx_wing.mp3");  
-  hitSound = loadSound("sfx_hit.mp3");    
+  jumpSound = loadSound("sfx_wing.mp3");
+  jumpSoundAux = loadSound("sfx_wing.mp3");
+
+  hitSound = loadSound("sfx_hit.mp3");
   point = loadSound("sfx_point.mp3");
 
   jumpSound.playMode('restart');
-  jumpSound.rate(1.2);  
+  jumpSound.rate(1.2);
+
+  jumpSoundAux.playMode('restart');
+  jumpSoundAux.rate(1.2);
 
   hitSound.playMode('restart');
-  hitSound.rate(1.2);  
-  
+  hitSound.rate(1.2);
+
   point.playMode('restart');
   point.rate(1.2);
 
+  bgmusic = loadSound("bg.mp3");
+  bgmusic.rate(1);
 
-  birdicon1 = loadImage("flappy-bird-blue.svg"); 
-  birdicon2 = loadImage("flappy-bird-blue-2.svg"); 
+
+
+  birdicon1 = loadImage("flappy-bird-blue.svg");
+  birdicon2 = loadImage("flappy-bird-blue-2.svg");
 
   cloudicon = loadImage("cloudwebp.webp");
 }
@@ -45,6 +63,7 @@ function preload() {
 
 function setup() {
   highScore = localStorage.getItem("highScore");
+
   frameRate(60);
   if (highScore > 0) {
     document.getElementById("highScore").textContent = highScore;
@@ -53,7 +72,7 @@ function setup() {
 
   createCanvas(innerWidth, innerHeight);
   bird = new Bird();
-  pipes.push(new Pipe());
+  //pipes.push(new Pipe());
 
   for (let i = 0; i < 20; i++) {
     clouds.push(new Cloud());
@@ -80,6 +99,7 @@ function draw() {
 
   if (gameOver) {
     document.getElementById("score").textContent = 0;
+    bgreset();
     textAlign(CENTER);
     fill(255);
     textSize(25);
@@ -129,11 +149,23 @@ function draw() {
 
       if (score === 50) {
         pipeW = 30;
+        bgspeed = 1.2;
+        volume = 0.8;
+        pipecolor.r = 255;
+        pipecolor.g = 148;
+        pipecolor.b = 54;
+        newbgspeed();
       }
 
       if (score === 100) {
         pipforce = 5;
         jumpforce = -9;
+        bgspeed = 1.5;
+        volume = 1;
+        pipecolor.r = 156;
+        pipecolor.g = 19;
+        pipecolor.b = 19;
+        newbgspeed();
       }
     }
 
@@ -163,6 +195,9 @@ function touchStarted() {
 function handleInput() {
   if (!gameStarted) {
     gameStarted = true;
+    bgmusic.loop();
+    bgmusic.setVolume(volume);
+    bgmusic.rate(bgspeed);
     resetStats();
   } else if (gameOver) {
     gameStarted = true;
@@ -173,7 +208,9 @@ function handleInput() {
     loop();
   } else {
     bird.jump();
-    jumpSound.play();
+    //if (!jumpSound.isPlaying()) jumpSound.play();
+    //if (!jumpSoundAux.isPlaying() && jumpSound.isPlaying()) jumpSoundAux.play();
+
   }
 }
 
@@ -201,11 +238,17 @@ function resetGame() {
 function resetStats() {
   score = 0;
   pipforce = 4;
+  pipeW = 40;
+  bgspeed = 1;
+  volume = 0.5;
   jumpforce = -10;
   gap = 200;
   Canvasbackground[1] = 135;
   Canvasbackground[2] = 206;
   Canvasbackground[3] = 235;
+  pipecolor.r = 0;
+  pipecolor.g = 200;
+  pipecolor.b = 0;
 }
 
 function showStats() {
@@ -217,15 +260,27 @@ function showStats() {
 }
 
 function cleanupSound() {
-  point.stop();
-  point.dispose(); 
-  point = loadSound("sfx_point.mp3"); 
+  if (point.isPlaying()) point.stop();
+  //if (jumpSound.isPlaying()) jumpSound.stop();
+  //if (jumpSoundAux.isPlaying()) jumpSoundAux.stop();
+  if (hitSound.isPlaying()) hitSound.stop();
+  if (bgmusic.isPlaying()) bgmusic.stop();
+}
 
-  jumpSound.stop();
-  jumpSound.dispose();
-  jumpSound = loadSound("sfx_wing.mp3");
+function newbgspeed() {
+  if (bgmusic.isPlaying()) {
+    bgmusic.stop();
+    bgmusic.loop();
+    bgmusic.setVolume(volume);
+    bgmusic.rate(bgspeed);
+  }
+}
 
-  hitSound.stop();
-  hitSound.dispose();
-  hitSound = loadSound("sfx_hit.mp3");
+function bgreset() {
+  if (bgmusic.isPlaying()) {
+    bgmusic.stop();
+    bgmusic.loop();
+    bgmusic.setVolume(volume);
+    bgmusic.rate(1);
+  }
 }

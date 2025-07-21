@@ -6,7 +6,7 @@ class Pipe {
     this.x = width;
     this.w = pipeW;
     this.passedFlag = false;
-    this.color = color(0, 200, 0);
+    this.color = color(pipecolor.r, pipecolor.g, pipecolor.b);
   }
 
   show() {

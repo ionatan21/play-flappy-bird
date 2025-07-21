@@ -1,35 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Flappy bird game made with p5.js" />
-    <link rel="icon" type="image/webp" href="flappy-bird-blue.svg" />
-    <title>Flappy bird</title>
 
-    <link rel="stylesheet" type="text/css" href="style.css" />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Flappy bird game made with p5.js" />
+  <meta name="author" content="Jonatan Barrios" />
+  <link rel="icon" type="image/webp" href="flappy-bird-blue.svg" />
+  <title>Flappy bird</title>
 
-    <script src="libraries/p5.min.js"></script>
-    <script src="libraries/p5.sound.min.js"></script>
-    <script>
-      window.va =
-        window.va ||
-        function () {
-          (window.vaq = window.vaq || []).push(arguments);
-        };
-    </script>
-    <script defer src="/_vercel/insights/script.js"></script>
-  </head>
+  <link rel="stylesheet" type="text/css" href="style.css" />
 
-  <body>
-    <div id="scoreBoard">
-      <span>PUNTAJE ACTUAL: <span id="score">0</span></span>
-      <span>MEJOR PUNTAJE: <span id="highScore">0</span></span>
-    </div>
+  <script src="libraries/p5.min.js"></script>
+  <script src="libraries/p5.sound.min.js"></script>
+  <script>
+    window.va =
+      window.va ||
+      function () {
+        (window.vaq = window.vaq || []).push(arguments);
+      };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</head>
 
-    <script src="sketch.js"></script>
-    <script src="bird.js"></script>
-    <script src="pipe.js"></script>
-    <script src="cloud.js"></script>
-  </body>
+<body>
+  <div id="scoreBoard">
+    <span>PUNTAJE ACTUAL: <span id="score">0</span></span>
+    <a href="https://portfolio-jonatan-barrios.vercel.app/" class="autor"></a>
+    <span>MEJOR PUNTAJE: <span id="highScore">0</span></span>
+  </div>
+
+  <script src="sketch.js"></script>
+  <script src="bird.js"></script>
+  <script src="pipe.js"></script>
+  <script src="cloud.js"></script>
+</body>
+
 </html>
