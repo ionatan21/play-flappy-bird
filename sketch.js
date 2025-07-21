@@ -16,8 +16,6 @@ let bgspeed = 1;
 let volume = 0.5;
 
 
-let jumpSound;
-let jumpSoundAux;
 let hitSound;
 let point;
 
@@ -29,17 +27,9 @@ let cloudicon;
 let bgmusic;
 
 function preload() {
-  jumpSound = loadSound("sfx_wing.mp3");
-  jumpSoundAux = loadSound("sfx_wing.mp3");
 
   hitSound = loadSound("sfx_hit.mp3");
   point = loadSound("sfx_point.mp3");
-
-  jumpSound.playMode('restart');
-  jumpSound.rate(1.2);
-
-  jumpSoundAux.playMode('restart');
-  jumpSoundAux.rate(1.2);
 
   hitSound.playMode('restart');
   hitSound.rate(1.2);
@@ -72,7 +62,6 @@ function setup() {
 
   createCanvas(innerWidth, innerHeight);
   bird = new Bird();
-  //pipes.push(new Pipe());
 
   for (let i = 0; i < 20; i++) {
     clouds.push(new Cloud());
@@ -208,9 +197,6 @@ function handleInput() {
     loop();
   } else {
     bird.jump();
-    //if (!jumpSound.isPlaying()) jumpSound.play();
-    //if (!jumpSoundAux.isPlaying() && jumpSound.isPlaying()) jumpSoundAux.play();
-
   }
 }
 
@@ -261,8 +247,6 @@ function showStats() {
 
 function cleanupSound() {
   if (point.isPlaying()) point.stop();
-  //if (jumpSound.isPlaying()) jumpSound.stop();
-  //if (jumpSoundAux.isPlaying()) jumpSoundAux.stop();
   if (hitSound.isPlaying()) hitSound.stop();
   if (bgmusic.isPlaying()) bgmusic.stop();
 }
